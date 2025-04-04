@@ -3,7 +3,7 @@ public class Car extends Vehicle implements Rentable {
 
     public Car(String make, String model, int year, int numSeats) {
         super(make, model, year);
-        this.numSeats = numSeats;
+        //this.numSeats = numSeats;
     }
 
     public int getNumSeats() {
