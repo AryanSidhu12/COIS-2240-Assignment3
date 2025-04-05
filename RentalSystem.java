@@ -1,5 +1,6 @@
 import java.util.List;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.time.LocalDate;
@@ -7,11 +8,20 @@ import java.util.ArrayList;
 import java.io.IOException;
 
 public class RentalSystem {
-	private static RentalSystem instance;
+	
+	//Under development
+	//private static RentalSystem instance;
+	//This is for the Singleton  TASK !!!!!!!!!!!!!!!!
+	
     private List<Vehicle> vehicles = new ArrayList<>();
     private List<Customer> customers = new ArrayList<>();
     private RentalHistory rentalHistory = new RentalHistory();
     
+    //Calls the method when an object is made
+    public RentalSystem()
+    {
+    	loadData();
+    }
       
      public void addVehicle(Vehicle vehicle) {
         vehicles.add(vehicle);
@@ -50,6 +60,7 @@ public class RentalSystem {
     }    
 
     public void displayVehicles(boolean onlyAvailable) {
+    	loadData();
     	System.out.println("|     Type         |\tPlate\t|\tMake\t|\tModel\t|\tYear\t|");
     	System.out.println("---------------------------------------------------------------------------------");
     	 
@@ -93,6 +104,11 @@ public class RentalSystem {
     {
     	try (FileWriter writer = new FileWriter("vehicles.txt", true))
     	{
+    		File file = new File("vehicles.txt");
+    		if (!file.exists())
+    		{
+    			file.createNewFile();
+    		}
     		writer.write(vehicle.toString() + "\n");
     	}
     	catch (IOException e)
@@ -105,6 +121,13 @@ public class RentalSystem {
     {
     	try(FileWriter writer = new FileWriter("customers.txt", true))
     	{
+        	try (FileWriter writer = new FileWriter("customers.txt", true))
+        	{
+        		File file = new File("customers.txt");
+        		if (!file.exists())
+        		{
+        			file.createNewFile();
+        		}
     		writer.write(customer.toString() + "\n");
     	}
     	catch (IOException e)
@@ -117,6 +140,13 @@ public class RentalSystem {
     {
     	try (FileWriter writer = new FileWriter("rental_records.txt", true))
     	{
+        	try (FileWriter writer = new FileWriter("rental_records.txt", true))
+        	{
+        		File file = new File("rental_records.txt");
+        		if (!file.exists())
+        		{
+        			file.createNewFile();
+        		}
     		writer.write(record.toString() + "\n");
     	}
     	catch (IOException e)
