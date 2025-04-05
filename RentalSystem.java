@@ -125,5 +125,68 @@ public class RentalSystem {
     	}
     }
     
+    private void loadData() {
+        loadVehicles();
+        loadCustomers();
+        loadRentalRecords();
+    }
+
+    private void loadVehicles() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("vehicles.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                Vehicle v = new Vehicle(parts[0], parts[1], parts[2], Integer.parseInt(parts[3]));
+                vehicles.add(v);
+            }
+        } catch (Exception e) {
+            System.out.println("Could not load vehicles.");
+        }
+    }
+
+    private void loadCustomers() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("customers.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                Customer c = new Customer(Integer.parseInt(parts[0]), parts[1]);
+                customers.add(c);
+            }
+        } catch (Exception e) {
+            System.out.println("Could not load customers.");
+        }
+    }
+
+    private void loadRentalRecords() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("rental_records.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split("\\|");
+                String type = parts[0].trim();
+                String plate = parts[1].split(":")[1].trim();
+                String name = parts[2].split(":")[1].trim();
+                String dateStr = parts[3].split(":")[1].trim();
+                String amountStr = parts[4].split("\\$")[1].trim();
+
+                Vehicle v = findVehicleByPlate(plate);
+                Customer c = findCustomerByName(name);
+                if (v != null && c != null) {
+                    RentalRecord record = new RentalRecord(v, c, LocalDate.parse(dateStr), Double.parseDouble(amountStr), type);
+                    rentalHistory.addRecord(record);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Could not load rental records.");
+        }
+    }
+
+    private Customer findCustomerByName(String name) {
+        for (Customer c : customers) {
+            if (c.getCustomerName().equalsIgnoreCase(name)) {
+                return c;
+            }
+        }
+        return null;
+    }
 
 }
