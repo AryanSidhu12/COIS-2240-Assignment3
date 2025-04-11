@@ -10,7 +10,7 @@ import java.io.IOException;
 public class RentalSystem {
 	
 	//Under development
-	//private static RentalSystem instance;
+	private static RentalSystem instance;
 	//This is for the Singleton  TASK !!!!!!!!!!!!!!!!
 
     private List<Vehicle> vehicles = new ArrayList<>();
@@ -131,10 +131,10 @@ public class RentalSystem {
         return null;
     }
     
-    public Customer findCustomerById(String id) 
+    public Customer findCustomerById(String i) 
     {
         for (Customer c : customers)
-            if (c.getCustomerId() == Integer.parseInt(id))
+            if (c.getCustomerId() == Integer.parseInt(i))
                 return c;
         return null;
     }

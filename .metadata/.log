@@ -282,3 +282,37 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.jdt.launching 4 120 2025-04-11 13:12:02.361
+!MESSAGE Cannot connect to VM
+!STACK 0
+java.net.SocketException: Socket closed
+	at java.base/sun.nio.ch.NioSocketImpl.endAccept(NioSocketImpl.java:682)
+	at java.base/sun.nio.ch.NioSocketImpl.accept(NioSocketImpl.java:755)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:694)
+	at java.base/java.net.ServerSocket.platformImplAccept(ServerSocket.java:659)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:635)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:581)
+	at java.base/java.net.ServerSocket.accept(ServerSocket.java:540)
+	at org.eclipse.jdi.internal.connect.SocketTransportService.accept(SocketTransportService.java:101)
+	at org.eclipse.jdi.internal.connect.SocketTransportImpl.accept(SocketTransportImpl.java:63)
+	at org.eclipse.jdi.internal.connect.SocketListeningConnectorImpl.accept(SocketListeningConnectorImpl.java:167)
+	at org.eclipse.jdt.internal.launching.StandardVMDebugger$ConnectRunnable.run(StandardVMDebugger.java:113)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+
+!ENTRY org.eclipse.jdt.launching 4 120 2025-04-11 13:12:42.853
+!MESSAGE Cannot connect to VM
+!STACK 0
+java.net.SocketException: Socket closed
+	at java.base/sun.nio.ch.NioSocketImpl.endAccept(NioSocketImpl.java:682)
+	at java.base/sun.nio.ch.NioSocketImpl.accept(NioSocketImpl.java:755)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:694)
+	at java.base/java.net.ServerSocket.platformImplAccept(ServerSocket.java:659)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:635)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:581)
+	at java.base/java.net.ServerSocket.accept(ServerSocket.java:540)
+	at org.eclipse.jdi.internal.connect.SocketTransportService.accept(SocketTransportService.java:101)
+	at org.eclipse.jdi.internal.connect.SocketTransportImpl.accept(SocketTransportImpl.java:63)
+	at org.eclipse.jdi.internal.connect.SocketListeningConnectorImpl.accept(SocketListeningConnectorImpl.java:167)
+	at org.eclipse.jdt.internal.launching.StandardVMDebugger$ConnectRunnable.run(StandardVMDebugger.java:113)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
