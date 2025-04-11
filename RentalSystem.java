@@ -147,47 +147,39 @@ public class RentalSystem {
         }
     }
     //SAVES IT TO MEMORY
-    private void saveVehicle(Vehicle vehicle) 
-    {
-        try (FileWriter writer = new FileWriter("vehicles.txt", true)) 
-        {
-            String type = "Car";                       
-            writer.write(type + "," + vehicle.getLicensePlate() + "," + vehicle.getMake() + "," + vehicle.getModel() + "," + vehicle.getYear() + ","+ vehicle.getStatus().toString()+"\n");
-        } 
-        catch (IOException e) 
-        {
+    private void saveVehicle(Vehicle vehicle) {
+        try (FileWriter writer = new FileWriter("vehicles.txt", true)) {
+            String type = (vehicle instanceof Car) ? "Car" :
+                          (vehicle instanceof Motorcycle) ? "Motorcycle" :
+                          (vehicle instanceof Truck) ? "Truck" :
+                          (vehicle instanceof SportCar) ? "SportCar" : "Unknown";
+
+            writer.write(type + "," +
+                         vehicle.getLicensePlate() + "," +
+                         vehicle.getMake() + "," +
+                         vehicle.getModel() + "," +
+                         vehicle.getYear() + "," +
+                         vehicle.getStatus().toString() + "\n");
+        } catch (IOException e) {
             System.out.println("Error saving vehicle: " + e.getMessage());
         }
     }
-    
-    private void saveCustomer(Customer customer)
 
-    {
-
-    	try(FileWriter writer = new FileWriter("customers.txt", true))
-    	{
-    		writer.write(customer. getCustomerId() + "," + customer.getCustomerName() + "\n");
-    	}
-    	catch (IOException e)
-    	{
-    		System.out.println("Error saving customer: " + e.getMessage());
-    	}
-
-    }
-    private void saveRecord(RentalRecord record)
-    {
-    	try (FileWriter writer = new FileWriter("rental_records.txt", true))
-    	{
-    		writer.write(record.toString() + "\n");
-    	}
-    	catch (IOException e)
-    	{
-    		System.out.println("Error saving records: "+e.getMessage());
-    	}
-
+    private void saveCustomer(Customer customer) {
+        try (FileWriter writer = new FileWriter("customers.txt", true)) {
+            writer.write(customer.getCustomerId() + "," + customer.getCustomerName() + "\n");
+        } catch (IOException e) {
+            System.out.println("Error saving customer: " + e.getMessage());
+        }
     }
 
-    
+    private void saveRecord(RentalRecord record) {
+        try (FileWriter writer = new FileWriter("rental_records.txt", true)) {
+            writer.write(record.toString() + "\n");
+        } catch (IOException e) {
+            System.out.println("Error saving record: " + e.getMessage());
+        }
+    }
     
     private void loadData() 
     {
