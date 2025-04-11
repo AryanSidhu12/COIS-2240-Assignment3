@@ -82,7 +82,7 @@ public class VehicleRentalApp {
                     scanner.nextLine();
 
                     Vehicle vehicleToRent = rentalSystem.findVehicleByPlate(rentPlate);
-                    Customer customerToRent = rentalSystem.findCustomerById(cidRent);
+                    Customer customerToRent = rentalSystem.findCustomerById(Integer.parseInt(cidRent));
 
                     if (vehicleToRent == null || customerToRent == null) {
                         System.out.println("Vehicle or customer not found.");
@@ -110,7 +110,7 @@ public class VehicleRentalApp {
                     scanner.nextLine();
 
                     Vehicle vehicleToReturn = rentalSystem.findVehicleByPlate(returnPlate);
-                    Customer customerToReturn = rentalSystem.findCustomerById(cidReturn);
+                    Customer customerToReturn = rentalSystem.findCustomerById(Integer.parseInt(cidReturn));
 
                     if (vehicleToReturn == null || customerToReturn == null) {
                         System.out.println("Vehicle or customer not found.");
