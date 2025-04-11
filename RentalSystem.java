@@ -12,17 +12,25 @@ public class RentalSystem {
 	//Under development
 	//private static RentalSystem instance;
 	//This is for the Singleton  TASK !!!!!!!!!!!!!!!!
-	
+
     private List<Vehicle> vehicles = new ArrayList<>();
     private List<Customer> customers = new ArrayList<>();
     private RentalHistory rentalHistory = new RentalHistory();
+    
     
     //Calls the method when an object is made
     public RentalSystem()
     {
     	loadData();
     }
-      
+   
+    public static RentalSystem getInstance() {
+        if (instance == null) {
+            instance = new RentalSystem();
+        }
+        return instance;
+    }
+    
      public void addVehicle(Vehicle vehicle) {
         vehicles.add(vehicle);
         saveVehicle(vehicle);
