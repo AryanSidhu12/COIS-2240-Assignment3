@@ -188,69 +188,55 @@ public class RentalSystem {
         loadRentalRecords();
     }
 
-    private void loadVehicles() 
-    {
-        try (BufferedReader reader = new BufferedReader(new FileReader("vehicles.txt"))) 
-        {
+    private void loadVehicles() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("vehicles.txt"))) {
             String line;
-            while ((line = reader.readLine()) != null) 
-            {
+            while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                String type = parts[0];
-                String plate = parts[1];
-                String make = parts[2];
-                String model = parts[3];
-                int year = Integer.parseInt(parts[4]);
-                String statusText = parts[5].trim(); // NEW
 
-                Vehicle v = null;
+                String type = parts[0].trim();
+                String plate = parts[1].trim();
+                String make = parts[2].trim();
+                String model = parts[3].trim();
+                int year = Integer.parseInt(parts[4].trim());
+                Vehicle.VehicleStatus status = Vehicle.VehicleStatus.valueOf(parts[5].trim());
 
-                if (type.equalsIgnoreCase("Car")) 
-                {
-                    v = new Car(make, model, year, 5);
-                } else if (type.equalsIgnoreCase("Motorcycle")) 
-                {
-                    v = new Motorcycle(make, model, year, false);
-                } else if (type.equalsIgnoreCase("Truck")) {
-                    v = new Truck(make, model, year, 5);
+                Vehicle vehicle = null;
+                if (type.equals("Car")) {
+                    vehicle = new Car(make, model, year, 5);
+                } else if (type.equals("Motorcycle")) {
+                    vehicle = new Motorcycle(make, model, year, false);
+                } else if (type.equals("Truck")) {
+                    vehicle = new Truck(make, model, year, 5);
+                } else if (type.equals("SportCar")) {
+                    vehicle = new SportCar(make, model, year, 5, 400, true); 
                 }
 
-                if (v != null) 
-                {
-                    v.setLicensePlate(plate);
-                    // Set vehicle status from file
-                    if (statusText.equalsIgnoreCase("RENTED")) 
-                    {
-                        v.setStatus(Vehicle.VehicleStatus.RENTED);
-                    } else {
-                        v.setStatus(Vehicle.VehicleStatus.AVAILABLE);
-                    }
-                    vehicles.add(v);
+                if (vehicle != null) {
+                    vehicle.setLicensePlate(plate);
+                    vehicle.setStatus(status);
+                    vehicles.add(vehicle);
                 }
             }
-        } 
-        catch (Exception e) 
-        {
-            System.out.println("Could not load vehicles: " + e.getMessage());
-        }
-    }
-    private void loadCustomers() 
-    {
-        try (BufferedReader reader = new BufferedReader(new FileReader("customers.txt")))
-        {
-            String line;
-            while ((line = reader.readLine()) != null) 
-            {
-                String[] parts = line.split(",");
-                Customer c = new Customer(Integer.parseInt(parts[0]), parts[1]);
-                customers.add(c);
-            }
-        } catch (Exception e) 
-        {
-            System.out.println("Could not load customers.");
+        } catch (IOException e) {
+            System.out.println("Error loading vehicles: " + e.getMessage());
         }
     }
 
+    private void loadCustomers() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("customers.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                int id = Integer.parseInt(parts[0].trim());
+                String name = parts[1].trim();
+
+                customers.add(new Customer(id, name));
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading customers: " + e.getMessage());
+        }
+    }
 
     
     private void loadRentalRecords() 
