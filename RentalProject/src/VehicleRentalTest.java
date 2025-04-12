@@ -36,6 +36,34 @@ public class VehicleRentalTest {
         assertThrows(IllegalArgumentException.class, () -> invalid4.setLicensePlate("ZZ99"));
     }
 
+    public void testRentAndReturnVehicle() {
 
+        Vehicle vehicle = new Car("Toyota", "Corolla", 2022, 4);
+        vehicle.setLicensePlate("TEST123");  //Checks for the certain pattern if it does not meet this it throws an error"AAA999"
+        vehicle.setStatus(Vehicle.VehicleStatus.AVAILABLE);
+
+        Customer customer = new Customer(100, "TestUser");
+
+
+        rentalSystem.addVehicle(vehicle);
+        rentalSystem.addCustomer(customer);
+
+
+        assertEquals(Vehicle.VehicleStatus.AVAILABLE, vehicle.getStatus());
+
+
+        rentalSystem.rentVehicle(vehicle, customer, LocalDate.now(), 100.0);
+        assertEquals(Vehicle.VehicleStatus.RENTED, vehicle.getStatus());
+
+        rentalSystem.rentVehicle(vehicle, customer, LocalDate.now(), 100.0);
+        assertEquals(Vehicle.VehicleStatus.RENTED, vehicle.getStatus()); // still rented
+
+        rentalSystem.returnVehicle(vehicle, customer, LocalDate.now(), 0.0);
+        assertEquals(Vehicle.VehicleStatus.AVAILABLE, vehicle.getStatus());
+
+     
+        rentalSystem.returnVehicle(vehicle, customer, LocalDate.now(), 0.0);
+        assertEquals(Vehicle.VehicleStatus.AVAILABLE, vehicle.getStatus()); 
+    }
     
 }
