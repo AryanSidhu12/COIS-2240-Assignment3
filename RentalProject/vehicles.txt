@@ -1,0 +1,4 @@
+Car,AAA111,Toyota,Corolla,2019,RENTED
+Car,BBB222,Honda,Civic,2021,RENTED
+Car,CCC333,Ford,Focus,2014,RENTED
+Car,TES123,Toyota,Corolla,2022,AVAILABLE

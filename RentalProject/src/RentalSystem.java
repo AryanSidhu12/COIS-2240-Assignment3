@@ -19,7 +19,7 @@ public class RentalSystem {
     
     
     //Calls the method when an object is made
-    public RentalSystem()
+    private RentalSystem()
     {
     	loadData();
     }
