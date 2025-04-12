@@ -36,6 +36,8 @@ public class VehicleRentalTest {
         assertThrows(IllegalArgumentException.class, () -> invalid4.setLicensePlate("ZZ99"));
     }
 
+    //Renting and Returning Vehicles
+    @Test
     public void testRentAndReturnVehicle() {
 
         Vehicle vehicle = new Car("Toyota", "Corolla", 2022, 4);
@@ -65,5 +67,15 @@ public class VehicleRentalTest {
         rentalSystem.returnVehicle(vehicle, customer, LocalDate.now(), 0.0);
         assertEquals(Vehicle.VehicleStatus.AVAILABLE, vehicle.getStatus()); 
     }
-    
+  
+    @Test
+    //Testing the signleton
+    public void testSingletonRentalSystem() throws Exception {
+        public void testSingletonRentalSystem() {
+            RentalSystem first = RentalSystem.getInstance();
+            RentalSystem second = RentalSystem.getInstance();
+
+            assertNotNull(first);
+            assertSame(first, second); // should be the same object
+    }
 }
